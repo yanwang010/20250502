@@ -15,8 +15,12 @@ function setup() {
 function draw() {
   background('#778da9'); // 確保背景顏色一致
 
-  // 將影像繪製到圖形緩衝區
-  graphics.image(capture, 0, 0, graphics.width, graphics.height);
+  // 將影像繪製到圖形緩衝區，並左右翻轉
+  graphics.push(); // 儲存當前狀態
+  graphics.translate(graphics.width, 0); // 將原點移到右側
+  graphics.scale(-1, 1); // 水平翻轉
+  graphics.image(capture, 0, 0, graphics.width, graphics.height); // 繪製影像
+  graphics.pop(); // 恢復狀態
 
   // 計算影像在畫布上的居中位置
   let x = (windowWidth - graphics.width) / 2;
