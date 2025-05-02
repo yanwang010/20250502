@@ -28,8 +28,8 @@ function draw() {
   // 在 graphics 上繪製圓形，顏色來自 capture 的相對位置
   for (let x = 0; x < graphics.width; x += 20) {
     for (let y = 0; y < graphics.height; y += 20) {
-      // 從 graphics 中取得相對應位置的顏色
-      let col = graphics.get(x, y);
+      // 從 capture 中取得相對應位置的顏色
+      let col = capture.get(x, y);
       graphics.fill(col); // 設定圓形顏色
       graphics.noStroke(); // 移除圓形邊框
       graphics.ellipse(x + 10, y + 10, 15, 15); // 繪製圓形，居中於單位格
