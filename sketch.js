@@ -15,12 +15,19 @@ function setup() {
 function draw() {
   background('#778da9'); // 確保背景顏色一致
 
-  // 將影像繪製到圖形緩衝區，並左右翻轉
-  graphics.push(); // 儲存當前狀態
-  graphics.translate(graphics.width, 0); // 將原點移到右側
-  graphics.scale(-1, 1); // 水平翻轉
-  graphics.image(capture, 0, 0, graphics.width, graphics.height); // 繪製影像
-  graphics.pop(); // 恢復狀態
+  // 設定 graphics 的背景為黑色
+  graphics.background(0);
+
+  // 在 graphics 上繪製圓形，顏色來自 capture 的相對位置
+  for (let x = 0; x < graphics.width; x += 20) {
+    for (let y = 0; y < graphics.height; y += 20) {
+      // 從 capture 中取得相對應位置的顏色
+      let col = capture.get(x, y);
+      graphics.fill(col); // 設定圓形顏色
+      graphics.noStroke(); // 移除圓形邊框
+      graphics.ellipse(x + 10, y + 10, 15, 15); // 繪製圓形，居中於單位格
+    }
+  }
 
   // 計算影像在畫布上的居中位置
   let x = (windowWidth - graphics.width) / 2;
