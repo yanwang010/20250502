@@ -18,11 +18,18 @@ function draw() {
   // 設定 graphics 的背景為黑色
   graphics.background(0);
 
+  // 水平翻轉 graphics 並繪製 capture 的影像
+  graphics.push(); // 儲存當前狀態
+  graphics.translate(graphics.width, 0); // 將原點移到右側
+  graphics.scale(-1, 1); // 水平翻轉
+  graphics.image(capture, 0, 0, graphics.width, graphics.height); // 繪製影像
+  graphics.pop(); // 恢復狀態
+
   // 在 graphics 上繪製圓形，顏色來自 capture 的相對位置
   for (let x = 0; x < graphics.width; x += 20) {
     for (let y = 0; y < graphics.height; y += 20) {
-      // 從 capture 中取得相對應位置的顏色
-      let col = capture.get(x, y);
+      // 從 graphics 中取得相對應位置的顏色
+      let col = graphics.get(x, y);
       graphics.fill(col); // 設定圓形顏色
       graphics.noStroke(); // 移除圓形邊框
       graphics.ellipse(x + 10, y + 10, 15, 15); // 繪製圓形，居中於單位格
